@@ -3609,7 +3609,7 @@ class TransitionNoise extends TransitionBase {
         threshold = this.timer.progress;
 
         if (this.sliding) {
-          threshold = (this.timer.progress * 1.3 - x/this.noiseTexture.size.x) * 2;
+          threshold = (this.timer.progress * 1.5 - x/this.noiseTexture.size.x) * 2;
         }
 
         if (random() < threshold) {

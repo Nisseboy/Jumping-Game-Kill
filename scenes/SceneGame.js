@@ -19,6 +19,7 @@ class SceneGame extends Scene {
     this.world = w.copy();
     this.player = this.world.getComponents(PlayerInput)[0].ob;
     player = this.player;
+    this.cam.pos.from(player.transform.pos);
 
     this.world.addComponent(new PhysicsManager());
 
