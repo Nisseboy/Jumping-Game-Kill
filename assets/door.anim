@@ -1,0 +1,13 @@
+(()=>{
+
+return new Animation([
+  new frame("door/1"),
+  new frame("door/2"),
+  new frame("door/3"),
+  new frame("door/4"),
+  new frame("door/5"),
+  new frame("door/6"),
+  new frame("door/7"),
+], 1/32);
+
+})();

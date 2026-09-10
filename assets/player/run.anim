@@ -1,0 +1,11 @@
+(()=>{
+
+return new Animation([
+  new event("step"),
+  new frame("player/run/1"),
+  new event("step"),
+  new frame("player/run/2"),
+  new loop(),
+], 1/6);
+
+})();

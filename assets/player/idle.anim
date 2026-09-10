@@ -1,0 +1,9 @@
+(()=>{
+
+return new Animation([
+  new frame("player/idle/1"),
+  new frame("player/idle/2"),
+  new loop(),
+], 1/4);
+
+})();

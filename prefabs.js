@@ -1,0 +1,60 @@
+
+let prefabs = {
+  "Player": {
+    tex: "player/skins/cowboy",
+    components: [PlayerInput],
+  },
+  "Key": {
+    tex: "key",
+    components: [Key],
+    scale: 0.5,
+  },
+  "Door": {
+    tex: "door/1",
+    components: [Door],
+    scale: 1,
+  },
+};
+
+
+
+
+let materials = [
+  new MaterialTex("air"),
+
+  new Material("wall", {
+    render: (pos) => {
+      renderer.set("fill", colorShiftColors["wall"]);
+      renderer.rect(pos, new Vec(1.01, 1.01));
+    }
+  }),
+  new Material("spike", {
+    hitbox: "circle",
+    hurt: true,
+    render: (pos) => {
+      renderer.set("fill", colorShiftColors["spike"]);
+
+      renderer.triangle(
+        new Vec(pos.x, pos.y + 0.25), 
+        new Vec(pos.x + 1, pos.y + 0.25),
+        new Vec(pos.x + 0.5, pos.y + 1),
+      );
+      renderer.triangle(
+        new Vec(pos.x, pos.y + 0.75), 
+        new Vec(pos.x + 1, pos.y + 0.75),
+        new Vec(pos.x + 0.5, pos.y),
+      );
+    }
+  }),
+];
+
+
+
+let skins = [
+  {name: "green"},
+  {name: "cowboy"},
+  {name: "ninja"},
+  {name: "shrek"},
+  {name: "king"},
+  {name: "kingking"},
+];
