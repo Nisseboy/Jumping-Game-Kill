@@ -20,7 +20,7 @@ class SceneMainMenu extends Scene {
         events: {mousedown: [() => {
           if (urlPath == "editor") nde.setScene(scenes.editor);
 
-          else nde.transition = new TransitionNoise(scenes.levelPicker, new TimerTime(2), true, 160);
+          else nde.transition = new TransitionNoise(scenes.levelPicker, new TimerTime(0.2), true, 160);
         }]},
       }),
 
