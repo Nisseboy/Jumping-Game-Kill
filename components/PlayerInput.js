@@ -258,7 +258,7 @@ class PlayerInput extends Component {
       scenes.game.particles.push({
         pos: this.transform.pos.copy().addV(new Vec(0, playerH * 0.5)),
         size: 0.05,
-        time: 80,
+        time: 0.5 + Math.random() * 0.3,
         c: colorShiftColors["wall"],
         av:  Math.random() * 0.5 - 0.25,
         vel: new Vec(Math.random() * 1 - 0.5, Math.random() * 2 - 2),
