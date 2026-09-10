@@ -58,7 +58,7 @@ class PlayerInput extends Component {
     this.sprite = this.getComponent(Sprite);
 
     this.sprite.offset.y = -2.5/16;
-    this.transform.pos.y += 2.5/16;
+    this.transform.pos.y += 2.49/16;
 
     this.sprite.tex = new StateMachineImg(
       new StateMachineNodeCondition(()=>this.walled!=0, 

@@ -56,7 +56,7 @@ class SceneGame extends Scene {
       nde.transition = new TransitionNoise(scenes.editor, new TimerTime(0.2), true, 160);
       return;
     }
-    if (levelData.bestTimes[this.world.name] > this.elapsedTime) levelData.bestTimes[this.world.name] = this.elapsedTime;
+    if ((levelData.bestTimes[this.world.name] ?? 100000) > this.elapsedTime) levelData.bestTimes[this.world.name] = this.elapsedTime;
     saveLevelData();
 
     let currentIndex = allRooms.findIndex(e=>e.name == this.world.name);
