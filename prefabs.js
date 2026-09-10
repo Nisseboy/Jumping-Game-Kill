@@ -14,6 +14,11 @@ let prefabs = {
     components: [Door],
     scale: 1,
   },
+  "Chicken Machine": {
+    tex: "machines/chickencrusher/1",
+    components: [Machine],
+    scale: 2,
+  },
 };
 
 
@@ -31,7 +36,7 @@ let materials = [
   new Material("spike", {
     hitbox: "circle",
     hurt: true,
-    render: (pos) => {
+    render: (pos) => { 
       renderer.set("fill", colorShiftColors["spike"]);
 
       renderer.triangle(

@@ -32,6 +32,14 @@ let assetPaths = [
   {"path":"rooms/03 Test Room.ob"},
   {"path":"rooms/04 Nils Hus.ob"},
   {"path":"rooms/05 The End.ob"},
-  {"path":"winscreen.ob"}
+  {"path":"winscreen.ob"},
+  {"path":"machines/chickencrusher/1.png"},
+  {"path":"machines/chickencrusher/2.png"},
+  {"path":"machines/chickencrusher/3.png"},
+  {"path":"machines/chickencrusher/4.png"},
+  {"path":"machines/chickencrusher/5.png"},
+  {"path":"machines/chickencrusher/6.png"},
+  {"path":"machines/chickencrusher/7.png"},
+  {"path":"machines/chickencrusher.anim"}
 ];
 let scenePaths = ["SceneEditor","SceneGame","SceneLevelPicker","SceneMainMenu","SceneSettings"];

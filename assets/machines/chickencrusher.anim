@@ -1,0 +1,13 @@
+(()=>{
+
+return new Animation([
+  new frame("machines/chickencrusher/1"),
+  new frame("machines/chickencrusher/2"),
+  new frame("machines/chickencrusher/3"),
+  new frame("machines/chickencrusher/4"),
+  new frame("machines/chickencrusher/5"),
+  new frame("machines/chickencrusher/6"),
+  new frame("machines/chickencrusher/7"),
+], 1/32);
+
+})();

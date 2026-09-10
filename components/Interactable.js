@@ -12,7 +12,8 @@ class Interactable extends Component {
   }
 
   enable() {
-    interactable.push(this);    
+    interactable.push(this);   
+     
   }
   disable() {    
     let index = interactable.indexOf(this);

@@ -22,7 +22,7 @@ let bounceFactor = 0.9;
 
 
 
-let pickupRange = 1;
+let pickupRange = 1.5;
 
 class PlayerInput extends Component {
   constructor() {
@@ -156,6 +156,29 @@ class PlayerInput extends Component {
         this.vel.y *= 0.5;
       }
     }
+
+
+    this.closestInteractable = undefined;
+    this.mousePos.from(scenes.game.cam.untransformVec(nde.mouse));
+    
+    let closestSqd = 1000;
+    for (let i = 0; i < interactable.length; i++) {
+      let item = interactable[i];
+      let sqd = this.transform.pos._subV(item.transform.pos).sqMag();
+      
+      if (sqd < pickupRange ** 2) {
+        let sqd2 = this.mousePos._subV(item.transform.pos).sqMag();
+        if (sqd2 < closestSqd) {
+          this.closestInteractable = item;
+          closestSqd = sqd2;
+        }
+      }
+    }
+
+    if (nde.getKeyDown("Interact") && this.closestInteractable) {
+      this.closestInteractable.interact(this.ob);      
+    }
+    
 
     
     if (this.graceTime && (this.grounded || this.walled)) {
