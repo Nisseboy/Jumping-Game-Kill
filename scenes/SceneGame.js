@@ -60,15 +60,16 @@ class SceneGame extends Scene {
     saveLevelData();
 
     let currentIndex = allRooms.findIndex(e=>e.name == this.world.name);
-    if (currentIndex == allRooms.length) {
-      this.win();
+    
+    if (currentIndex == allRooms.length - 1) {
+      this.nextLevelScheduled = nde.assets["winscreen"];
       return;
     }
     this.nextLevelScheduled = allRooms[currentIndex + 1];
   }
 
   update(dt) {  
-    if (this.nextLevelScheduled) {
+    if (this.nextLevelScheduled) {      
       nde.transition = new TransitionNoise(scenes.game, new TimerTime(0.4), true, 160);
       return;
     }

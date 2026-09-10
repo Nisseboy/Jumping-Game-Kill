@@ -30,6 +30,8 @@ let assetPaths = [
   {"path":"rooms/01 Test Room.ob"},
   {"path":"rooms/02 Test Room.ob"},
   {"path":"rooms/03 Test Room.ob"},
-  {"path":"rooms/04 Test Room.ob"}
+  {"path":"rooms/04 Nils Hus.ob"},
+  {"path":"rooms/05 The End.ob"},
+  {"path":"winscreen.ob"}
 ];
 let scenePaths = ["SceneEditor","SceneGame","SceneLevelPicker","SceneMainMenu","SceneSettings"];

@@ -84,10 +84,11 @@ class PlayerInput extends Component {
     });
 
 
-    let descriptors;
+    let descriptors = [];
     let levelIndex = allRooms.findIndex(e=>e.name == scenes.game.world.name);
     if (scenes.game.inEditor) {
-      descriptors = [scenes.game.world.getComponent(LevelDescriptor)];
+      this.unlockDash = true;
+      this.unlockWallJump = true;
     } else {
       descriptors = allRooms.map((room, index) => {
         if (index > levelIndex) return undefined;

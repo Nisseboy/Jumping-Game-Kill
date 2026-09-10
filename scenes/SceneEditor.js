@@ -649,8 +649,8 @@ class SceneEditor extends Scene {
 
     if (!world) {
       //this.loadWorld(new Ob({}, [new Grid({size: new Vec(5, 5)})]));
-      this.loadWorld(allRooms[0]);
-      //this.openLevelPicker();
+      //this.loadWorld(allRooms[0]);
+      this.openLevelPicker();
     }
     
     this.mousePos = new Vec(0, 0);  
@@ -805,6 +805,12 @@ class SceneEditor extends Scene {
 
         g.moveEdge(this.edge.held, dir);
         
+        break;
+      
+      default:
+        let scrollMult = 0.001;
+        if (nde.scrolled > 0) this.cam.w *= 1 + nde.scrolled * scrollMult;
+        if (nde.scrolled < 0) this.cam.w /= 1 - nde.scrolled * scrollMult;
         break;
     }
 
