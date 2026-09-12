@@ -28,6 +28,8 @@ class SceneGame extends Scene {
     this.initParticles();
 
     this.elapsedTime = 0;
+
+    this.interactable = [];
   }
 
   start() {

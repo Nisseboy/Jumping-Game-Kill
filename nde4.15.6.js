@@ -1410,12 +1410,24 @@ class StateMachine {
   choose() {
     let choice = this.rootNode;
 
-    while (choice && !(choice instanceof StateMachineNodeResult)) {
-      choice = choice.choose(this);
+    for (let i = 0; i < 100; i++) {
+      if (choice instanceof StateMachineNodeCondition) {
+        choice = choice.choose(this);
+        continue;
+      }
+      if (typeof choice == "function") {
+        choice = choice();
+        continue;
+      }
+      if (choice instanceof StateMachineNodeResult) {
+        choice = choice.result;
+        break;
+      }
+      break;
     }
 
     if (choice != this.lastChoice) {    
-      this.parseResult(choice.result);
+      this.parseResult(choice);
       this.fire("change", this.result);
       this.lastChoice = choice;
     }
@@ -1459,6 +1471,8 @@ class StateMachineImg extends StateMachine {
 
   parseResult(result) {
     if (this.result instanceof RunningAnimation) this.result.stop();
+
+    if (typeof result == "string") result = nde.tex[result];
 
     if (result instanceof Animation) {  
       this.result = result.start({listeners: [this.e]});

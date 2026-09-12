@@ -61,20 +61,18 @@ class PlayerInput extends Component {
     this.transform.pos.y += 2.49/16;
 
     this.sprite.tex = new StateMachineImg(
-      new StateMachineNodeCondition(()=>this.walled!=0, 
-        new StateMachineNodeResult(nde.tex["player/wall/1"]),
-
-        new StateMachineNodeCondition(()=>this.grounded==0,
-          new StateMachineNodeCondition(()=>this.vel.y > 0,        
-            new StateMachineNodeResult(nde.tex["player/fall/1"]),
-            new StateMachineNodeResult(nde.tex["player/jump/1"]),
-          ),
-         
-          new StateMachineNodeCondition(()=>this.vel.x != 0,
-            new StateMachineNodeResult(nde.tex["player/run"]),
-            new StateMachineNodeResult(nde.tex["player/idle"]),
-          ),
-        ),
+      ()=>(this.walled != 0?
+        "player/wall/1" :
+        ()=>(this.grounded == 0?
+          ()=>(this.vel.y > 0 ? 
+            "player/fall/1" :
+            "player/jump/1"
+          ) :
+          ()=>(this.vel.x != 0 ? 
+            "player/run" :
+            "player/idle"
+          )
+        )
       )
     );
 
@@ -108,37 +106,6 @@ class PlayerInput extends Component {
     
   }
   
-  /*
-  update(dt) {    
-    
-    let speedMult = nde.getKeyPressed("Run") ? 2 : 1;
-
-    this.duck.move(new Vec(
-      nde.getKeyPressed("Move Right") - nde.getKeyPressed("Move Left"),
-      nde.getKeyPressed("Move Down") - nde.getKeyPressed("Move Up"),
-    ).normalize().mul(this.speed * speedMult), dt);
-
-    this.closestInteractable = undefined;
-    let closestSqd = 1000;
-    for (let i = 0; i < interactable.length; i++) {
-      let item = interactable[i];
-      let sqd = this.transform.pos._subV(item.transform.pos).sqMag();
-      if (sqd < pickupRange) {
-        let sqd2 = this.mousePos._subV(item.transform.pos).sqMag();
-        if (sqd2 < closestSqd) {
-          this.closestInteractable = item;
-          closestSqd = sqd2;
-        }
-      }
-    }
-
-    if (nde.getKeyDown("Interact")) {
-      if (this.closestInteractable) this.closestInteractable.interact(this.ob);      
-      else scenes.game.closeInventory();
-    }
-
-  }
-      */
 
   
 
@@ -162,8 +129,8 @@ class PlayerInput extends Component {
     this.mousePos.from(scenes.game.cam.untransformVec(nde.mouse));
     
     let closestSqd = 1000;
-    for (let i = 0; i < interactable.length; i++) {
-      let item = interactable[i];
+    for (let i = 0; i < scenes.game.interactable.length; i++) {
+      let item = scenes.game.interactable[i];
       let sqd = this.transform.pos._subV(item.transform.pos).sqMag();
       
       if (sqd < pickupRange ** 2) {

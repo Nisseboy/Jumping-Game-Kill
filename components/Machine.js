@@ -8,8 +8,8 @@ class Machine extends Component {
       let sprite = this.getComponent(Sprite);
       let split = sprite.tex.split("/");
       split.pop();
-      sprite.tex = split.join("/");
-      
+      sprite.tex = split.join("/");      
+
       this.getComponent(Interactable).active = false;
     });
   }

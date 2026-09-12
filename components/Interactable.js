@@ -1,5 +1,3 @@
-let interactable = [];
-
 class Interactable extends Component {
   constructor(props = {}) {
     super();
@@ -7,18 +5,13 @@ class Interactable extends Component {
     this.text = props.text || "";
   }
 
-  start() {
-    this.ob.interactable = this;    
-  }
-
   enable() {
-    interactable.push(this);   
-     
+    scenes.game.interactable.push(this);   
   }
   disable() {    
-    let index = interactable.indexOf(this);
+    let index = scenes.game.interactable.indexOf(this);
     if (index == -1) return;
-    interactable.splice(index, 1);    
+    scenes.game.interactable.splice(index, 1);    
   }
 
   interact(...args) {
@@ -31,11 +24,5 @@ class Interactable extends Component {
     this.text = data.text;
     
     return this;
-  }
-
-  strip() {
-    delete this.ob.interactable;
-
-    super.strip();
   }
 }
