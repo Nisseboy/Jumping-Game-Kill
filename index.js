@@ -127,6 +127,10 @@ function processPrefabs() {
     p.components ??= [];
 
     p.scale ??= 1;
+
+    if (p.interactable) {
+      if (!p.components.includes(Interactable)) p.components.push(Interactable);
+    }
   }
 }
 function prefab(prefab, props = {}) {
@@ -145,7 +149,15 @@ function prefab(prefab, props = {}) {
   for (let c of type.components) {
     ob.addComponent(new c());
   }
-  
+
+  if (type.interactable) {
+    let interactable = ob.getComponent(Interactable);
+    
+    for (let i in type.interactable) {
+      interactable[i] = type.interactable[i];
+    }
+  }
+
   return ob;
 }
 

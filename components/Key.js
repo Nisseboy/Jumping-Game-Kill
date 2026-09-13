@@ -8,10 +8,6 @@ class Key extends Component {
 
   }
   start() {
-    this.on("collisionEnter", () => {
-      scenes.game.world.getComponents(Door)[0].fire("open");
-      this.ob.remove();
-    })
     this.lastParticleTime = 0;
   }
 

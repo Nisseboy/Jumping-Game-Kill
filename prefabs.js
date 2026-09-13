@@ -8,16 +8,27 @@ let prefabs = {
     tex: "key",
     components: [Key],
     scale: 0.5,
+    interactable: {
+      send: "door0",
+      recieve: "enter",
+      done: "remove",
+    },
   },
   "Door": {
     tex: "door/1",
     components: [Door],
     scale: 1,
+    interactable: {
+      recieve: "door0",
+    }
   },
   "Chicken Machine": {
     tex: "machines/chickencrusher/1",
     components: [Machine],
     scale: 2,
+    interactable: {
+      recieve: "player",
+    }
   },
   "Banana": {
     tex: "banana",

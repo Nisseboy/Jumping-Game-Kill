@@ -28,7 +28,6 @@ let assetPaths = [
   {"path":"door/7.png"},
   {"path":"door.anim"},
   {"path":"rooms/01 Test Room.ob"},
-  {"path":"rooms/02 Test Room.ob"},
   {"path":"rooms/03 Test Room.ob"},
   {"path":"rooms/04 Nils Hus.ob"},
   {"path":"rooms/05 The End.ob"},

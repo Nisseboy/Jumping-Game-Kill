@@ -323,6 +323,7 @@ class SceneEditor extends Scene {
 
           min: 0,
           max: 100,
+          step: 0.01,
           value: c.time,
 
           events: {change: [e => {
@@ -347,6 +348,35 @@ class SceneEditor extends Scene {
             c.unlockDash = e;            
           }]},
         }));
+      } else if (c instanceof Interactable) {
+        setting("Send", new UISettingText({
+          style: {...buttonStyle},
+
+          value: c.send,
+
+          events: {change: [e => {
+            c.send = e;            
+          }]},
+        }));
+        setting("Recieve", new UISettingText({
+          style: {...buttonStyle},
+
+          value: c.recieve,
+
+          events: {change: [e => {
+            c.recieve = e;            
+          }]},
+        }));
+        setting("On Done", new UISettingText({
+          style: {...buttonStyle},
+
+          value: c.done,
+
+          events: {change: [e => {
+            c.done = e;            
+          }]},
+        }));
+        
       } /*else if (c instanceof Item) {
         setting("Amount", new UISettingRange({
           style: {...buttonStyle,},

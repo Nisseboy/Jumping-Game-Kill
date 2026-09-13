@@ -9,7 +9,7 @@ class Door extends Component {
   }
 
   start() {
-    this.on("open", () => {
+    this.on("interact", () => {
       this.open = true;
     });
     this.on("collisionEnter", () => {

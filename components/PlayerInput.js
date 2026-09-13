@@ -152,6 +152,8 @@ class PlayerInput extends Component {
     let closestSqd = 1000;
     for (let i = 0; i < scenes.game.interactable.length; i++) {
       let item = scenes.game.interactable[i];
+      if (!item.recieve.split(",").includes("player")) continue;
+
       let sqd = this.transform.pos._subV(item.transform.pos).sqMag();
       
       if (sqd < pickupRange ** 2) {
