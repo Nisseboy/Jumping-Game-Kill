@@ -19,6 +19,11 @@ let prefabs = {
     components: [Machine],
     scale: 2,
   },
+  "Banana": {
+    tex: "banana",
+    components: [Banana],
+    scale: 0.5,
+  },
 };
 
 

@@ -40,6 +40,8 @@ let assetPaths = [
   {"path":"machines/chickencrusher/5.png"},
   {"path":"machines/chickencrusher/6.png"},
   {"path":"machines/chickencrusher/7.png"},
-  {"path":"machines/chickencrusher.anim"}
+  {"path":"machines/chickencrusher.anim"},
+  {"path":"banana.png"},
+  {"path":"player/slip/1.png"}
 ];
 let scenePaths = ["SceneEditor","SceneGame","SceneLevelPicker","SceneMainMenu","SceneSettings"];

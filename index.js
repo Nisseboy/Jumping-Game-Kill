@@ -84,7 +84,7 @@ nde.on("afterSetup", () => {
   nde.setScene(scenes.mainMenu);
 
 
-  //scenes.game.loadWorld(allRooms[4]);
+  //scenes.game.loadWorld(allRooms[6]);
   //nde.setScene(scenes.game);
 });
 

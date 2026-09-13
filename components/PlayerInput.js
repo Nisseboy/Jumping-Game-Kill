@@ -47,6 +47,9 @@ class PlayerInput extends Component {
     this.dash = 0;
     this.dashCooldown = 0;
 
+    this.moveCooldown = 0;
+    this.slipping = 0;
+
     this.lastParticleTime = 0;
   }
 
@@ -61,19 +64,19 @@ class PlayerInput extends Component {
     this.transform.pos.y += 2.49/16;
 
     this.sprite.tex = new StateMachineImg(
-      ()=>(this.walled != 0?
-        "player/wall/1" :
-        ()=>(this.grounded == 0?
-          ()=>(this.vel.y > 0 ? 
-            "player/fall/1" :
-            "player/jump/1"
-          ) :
-          ()=>(this.vel.x != 0 ? 
-            "player/run" :
-            "player/idle"
-          )
-        )
-      )
+      ()=>this.slipping != 0?
+        "player/slip/1" :
+        ()=>this.walled != 0?
+          "player/wall/1" :
+          ()=>this.grounded == 0?
+            ()=>this.vel.y > 0 ? 
+              "player/fall/1" :
+              "player/jump/1"
+            :
+            ()=>this.vel.x != 0 ? 
+              "player/run" :
+              "player/idle"
+      
     );
 
     //From "player/run" when thats the state
@@ -107,22 +110,40 @@ class PlayerInput extends Component {
   }
   
 
+  slip() {
+    this.moveCooldown = 0.5;
+    this.slipping = Math.sign(this.vel.x) || (Math.round(Math.random()) * 0.2 - 0.1);
+  }
+  unslip() {
+    this.moveCooldown = 0;
+    this.slipping = 0;
+  }
   
 
   update(dt) {
     if (nde.getKeyDown("Change Skin")) cycleSkin();
 
-    if (nde.getKeyDown("Jump")) {
-      this.graceTime = graceTime;
-    }
-    if (nde.getKeyDown("Dash") && this.unlockDash) {
-      this.dashGraceTime = dashGraceTime;
-    }
-    if (nde.getKeyUp("Jump")) {
-      if (this.inJump && this.vel.y < 0) {
-        this.vel.y *= 0.5;
+
+    if (this.moveCooldown == 0) {
+      if (nde.getKeyDown("Jump")) {
+        this.graceTime = graceTime;
+      }
+      if (nde.getKeyDown("Dash") && this.unlockDash) {
+        this.dashGraceTime = dashGraceTime;
+      }
+      if (nde.getKeyUp("Jump")) {
+        if (this.inJump && this.vel.y < 0) {
+          this.vel.y *= 0.5;
+        }
+      }
+    } else {
+      this.moveCooldown = Math.max(this.moveCooldown - dt, 0)
+
+      if (this.moveCooldown == 0) {
+        if (this.slipping) this.unslip();
       }
     }
+    
 
 
     this.closestInteractable = undefined;
@@ -166,12 +187,21 @@ class PlayerInput extends Component {
     
     let movement = nde.getKeyPressed("Move Right") - nde.getKeyPressed("Move Left");
 
+    if (this.moveCooldown != 0) {
+      movement = 0;
+      if (this.slipping) {
+        movement = this.slipping;
+        this.slipping *= Math.pow(0.01, dt);
+      }
+      
+    }
+
     if (movement < 0 && this.inWallJump >= 0) {
-      this.vel.x = -playerSpeed;
+      this.vel.x = playerSpeed * movement;
       this.transform.size.x = -1;
     }
     if (movement > 0 && this.inWallJump <= 0) {
-      this.vel.x = playerSpeed;
+      this.vel.x = playerSpeed * movement;
       this.transform.size.x = 1;
     }
 
@@ -392,13 +422,5 @@ class PlayerInput extends Component {
       });
     }
 
-  }
-
-  from(data) {
-    super.from(data);
-
-    this.speed = data.speed;
-
-    return this;
   }
 }
