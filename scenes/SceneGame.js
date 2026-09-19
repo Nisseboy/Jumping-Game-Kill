@@ -52,7 +52,8 @@ class SceneGame extends Scene {
   }
 
   restart() {
-    this.nextLevelScheduled = allRooms.find(e=>e.name == this.world.name);
+    if (this.inEditor) this.nextLevelScheduled = world.copy();
+    else this.nextLevelScheduled = allRooms.find(e=>e.name == this.world.name);
   }
   nextLevel() {
     if (this.inEditor) {

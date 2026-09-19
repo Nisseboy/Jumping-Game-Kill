@@ -6,7 +6,7 @@ EDITORSTATE = {
   edge: 4,
 };
 
-const EditorComponents = ["LevelDescriptor", "Key"];
+const EditorComponents = ["Interactable", "LevelDescriptor", "Key"];
 
 let world;
 class SceneEditor extends Scene {
@@ -317,6 +317,19 @@ class SceneEditor extends Scene {
             this.openProperties(ob2);
           }]},
         }));
+        if (!c.hasInit) {
+          setting("", new UIButtonText({
+            style: {...buttonStyle,},
+            textStyle: {...buttonStyle,},
+
+            text: "Instantiate",
+
+            events: {mousedown: [e => {
+              ob.update(1/60);
+              this.openProperties(ob, false);
+            }]},
+          }));
+        }
       } else if (c instanceof LevelDescriptor) {
         setting("Time", new UISettingRange({
           style: {...buttonStyle,},
@@ -679,8 +692,8 @@ class SceneEditor extends Scene {
 
     if (!world) {
       //this.loadWorld(new Ob({}, [new Grid({size: new Vec(5, 5)})]));
-      //this.loadWorld(allRooms[0]);
-      this.openLevelPicker();
+      this.loadWorld(allRooms[0]);
+      //this.openLevelPicker();
     }
     
     this.mousePos = new Vec(0, 0);  

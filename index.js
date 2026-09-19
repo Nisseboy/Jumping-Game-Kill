@@ -52,7 +52,7 @@ nde.controls = {
 
   "Pause": "Escape",
   "Debug Mode": "l",
-  "UI Debug Mode": "k",
+  "UI Debug Mode": "ö",
 };
 
 
@@ -126,8 +126,6 @@ function processPrefabs() {
 
     p.components ??= [];
 
-    p.scale ??= 1;
-
     if (p.interactable) {
       if (!p.components.includes(Interactable)) p.components.push(Interactable);
     }
@@ -139,24 +137,10 @@ function prefab(prefab, props = {}) {
   let ob = new Ob({name: prefab, ...props});
 
   if (type.tex) ob.addComponent(new Sprite(type.tex));
-  if (type.texEditor) ob.addComponent(new SpriteEditor(type.texEditor));
-  
-  ob.transform.size.mul(type.scale);
+  ob.transform.size.from(vecOne);
+  if (type.scale) ob.transform.size.mul(type.scale);
   
   ob.addComponent(new Prefab(prefab));
-  
-
-  for (let c of type.components) {
-    ob.addComponent(new c());
-  }
-
-  if (type.interactable) {
-    let interactable = ob.getComponent(Interactable);
-    
-    for (let i in type.interactable) {
-      interactable[i] = type.interactable[i];
-    }
-  }
 
   return ob;
 }

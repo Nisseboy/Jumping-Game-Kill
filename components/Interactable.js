@@ -10,11 +10,11 @@ class Interactable extends Component {
   }
 
   start() {
-    if (!this.getComponent(Collider)) {
+    if (this.recieve.split(",").includes("enter") && !this.getComponent(Collider)) {
       this.addComponent(new ColliderRect({size: this.transform.size}));
     }
 
-    this.on("collisionEnter", (collider) => {            
+    this.on("collisionEnter", (collider) => {                  
       if (!this.recieve.split(",").includes("enter")) return; 
       if (!scenes.game.interactable.includes(this)) return;  
       
@@ -23,7 +23,7 @@ class Interactable extends Component {
   }
 
   enable() {
-    scenes.game.interactable.push(this);   
+    scenes.game.interactable?.push(this);   
   }
   disable() {    
     let index = scenes.game.interactable.indexOf(this);

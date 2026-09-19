@@ -12,6 +12,30 @@ class Prefab extends Component {
   init() {
     //pixelScale(this.ob, this.info.scale);
     this.ob.info = this.info;
+
+    let info = this.info;
+
+    let sprite = this.getComponent(Sprite);
+    if (sprite) sprite.tex = info.tex;
+
+    this.transform.size.from(vecOne);
+    if (info.scale) this.transform.size.mul(info.scale);
+
+    for (let c of info.components) {
+      if (this.getComponent(c)) continue;
+
+      let component = new c();
+
+      let componentInfo = info[component.constructor.name.toLowerCase()];
+      
+      if (componentInfo) {
+        for (let prop in componentInfo) {
+          component[prop] = componentInfo[prop];
+        }
+      }
+
+      this.addComponent(component);
+    }
   }
 
   start() {
