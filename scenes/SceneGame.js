@@ -92,6 +92,9 @@ class SceneGame extends Scene {
     this.cam.pos.y = Math.max(this.cam.pos.y, 4.5);
     this.cam.pos.y = Math.min(this.cam.pos.y, this.world.grid.size.y - 4.5);
 
+    if (this.world.grid.size.x < 16) this.cam.pos.x = this.world.grid.size.x * 0.5;
+    if (this.world.grid.size.y < 9) this.cam.pos.y = this.world.grid.size.y * 0.5;
+
     moveListener(this.cam.pos);
     
     this.updateParticles(dt);

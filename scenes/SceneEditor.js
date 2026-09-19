@@ -692,8 +692,8 @@ class SceneEditor extends Scene {
 
     if (!world) {
       //this.loadWorld(new Ob({}, [new Grid({size: new Vec(5, 5)})]));
-      this.loadWorld(allRooms[0]);
-      //this.openLevelPicker();
+      //this.loadWorld(allRooms[0]);
+      this.openLevelPicker();
     }
     
     this.mousePos = new Vec(0, 0);  
